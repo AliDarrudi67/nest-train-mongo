@@ -1,6 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
+import { BlogQueryDto } from './dto/blog-query.dto';
 import { CreateBlogDto } from './dto/create-blog.dto';
 import { UpdateBlogDto } from './dto/update-blog.dto';
 import { Blog } from './schemas/blog.schema';
@@ -17,8 +18,19 @@ export class BlogService {
     return newBlog;
   }
 
-  async findAll() {
-    return await this.blogModel.find().exec();
+  async findAll(queryParams: BlogQueryDto) {
+    const { limit = 10, page = 1, title } = queryParams;
+    const query: any = {};
+    if (title) {
+      query.title = { $regex: title, $options: 'i' };
+    }
+    const blogs = await this.blogModel
+      .find(query)
+      .skip(page - 1)
+      .limit(limit)
+      .exec();
+    const count = await this.blogModel.countDocuments();
+    return { count, blogs };
   }
 
   async findOne(id: string) {

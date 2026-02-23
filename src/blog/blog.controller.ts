@@ -6,8 +6,10 @@ import {
   Param,
   Patch,
   Post,
+  Query,
 } from '@nestjs/common';
 import { BlogService } from './blog.service';
+import { BlogQueryDto } from './dto/blog-query.dto';
 import { CreateBlogDto } from './dto/create-blog.dto';
 import { UpdateBlogDto } from './dto/update-blog.dto';
 
@@ -21,8 +23,8 @@ export class BlogController {
   }
 
   @Get()
-  findAll() {
-    return this.blogService.findAll();
+  findAll(@Query() queryParams: BlogQueryDto) {
+    return this.blogService.findAll(queryParams);
   }
 
   @Get(':id')

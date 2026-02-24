@@ -15,6 +15,7 @@ import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { LoggerMiddleware } from './logger/logger.middleware';
 import { BlogModule } from './blog/blog.module';
+import { BlogCategoryModule } from './blog-category/blog-category.module';
 
 @Module({
   imports: [
@@ -57,6 +58,7 @@ import { BlogModule } from './blog/blog.module';
       rootPath: path.join(process.cwd(), 'static'),
     }),
     BlogModule,
+    BlogCategoryModule,
   ],
   controllers: [AppController],
   providers: [AppService],

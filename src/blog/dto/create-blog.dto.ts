@@ -10,4 +10,8 @@ export class CreateBlogDto {
   @IsNotEmpty()
   @MinLength(10)
   content: string;
+
+  @IsString()
+  @IsNotEmpty()
+  category: string;
 }

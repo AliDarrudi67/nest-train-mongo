@@ -1,20 +1,3 @@
-import { ApiPropertyOptional } from '@nestjs/swagger';
-import { Type } from 'class-transformer';
-import { IsOptional, IsPositive, IsString } from 'class-validator';
+import { GeneralQueryDto } from 'src/shared/dtos/general-query.dto';
 
-export class BlogQueryDto {
-  @IsOptional()
-  @IsPositive()
-  @ApiPropertyOptional()
-  @Type(() => Number)
-  page: number;
-  @IsOptional()
-  @IsPositive()
-  @ApiPropertyOptional()
-  @Type(() => Number)
-  limit: number;
-  @IsOptional()
-  @IsString()
-  @ApiPropertyOptional()
-  title: string;
-}
+export class BlogQueryDto extends GeneralQueryDto {}
